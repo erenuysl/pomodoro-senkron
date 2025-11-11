@@ -2,6 +2,13 @@
 
 A collaborative Pomodoro timer application with real-time group activity tracking, built with React, Firebase, and Tailwind CSS.
 
+
+<p align="center">
+  <img width="308" height="812" alt="App Screenshot 1" src="https://github.com/user-attachments/assets/5660c4f4-6f12-420f-b455-d2b91dad85ba" />
+  <img width="314" height="803" alt="App Screenshot 2" src="https://github.com/user-attachments/assets/164df964-75bb-448c-97c4-0beeee843108" />
+</p>
+
+
 ## Features
 
 - 🎯 **Adjustable Pomodoro Timer** - Rotate the timer dial to set duration (5-60 minutes)
@@ -126,6 +133,8 @@ service cloud.firestore {
   }
 }
 ```
+<img width="308" height="812" alt="2" src="https://github.com/user-attachments/assets/5660c4f4-6f12-420f-b455-d2b91dad85ba" />
+<img width="314" height="803" alt="1" src="https://github.com/user-attachments/assets/164df964-75bb-448c-97c4-0beeee843108" />
 
 ## Contributing
 
