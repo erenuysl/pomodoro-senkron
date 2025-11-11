@@ -1,0 +1,30 @@
+{
+  "name": "Pomodoro Connect",
+  "short_name": "Pomodoro",
+  "description": "Sosyal, rekabetçi ve verimli bir Pomodoro çalışma arkadaşı.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A1A1F",
+  "theme_color": "#00E5FF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/masked-icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/masked-icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ]
+}

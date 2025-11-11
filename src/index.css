@@ -1,0 +1,214 @@
+/* Import Inter font for mobile-friendly typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: radial-gradient(120% 120% at 50% 0%, #0A1A1F 30%, #09131A 100%);
+  --text: #e6f6fb;
+  --card: rgba(255, 255, 255, 0.06);
+  --primary: #00E5FF; /* neon turquoise */
+}
+
+.dark {
+  --bg: radial-gradient(120% 120% at 50% 0%, #081219 30%, #070F14 100%);
+  --text: #d6eef3;
+  --card: rgba(255, 255, 255, 0.08);
+  --primary: #00E5FF;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  /* Mobilde pull-to-refresh'i engelle */
+  overscroll-behavior-y: contain;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  display: block !important;
+  justify-content: unset !important;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: block;
+}
+
+html { scroll-behavior: smooth; }
+
+/* Remove underline from nav links */
+.nav-link { text-decoration: none; }
+.nav-link:focus { text-decoration: none; }
+
+/* Mobile-first helpers */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+}
+
+.glass-card {
+  background: var(--card);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.glow-btn {
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.45);
+}
+
+.ring-progress {
+  width: 240px;
+  height: 240px;
+  border-radius: 9999px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.ring-progress::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 12px;
+  background:
+    radial-gradient(closest-side, rgba(0,0,0,0) 79%, rgba(0,0,0,0) 80% 99%, rgba(0,0,0,0) 100%),
+    conic-gradient(var(--primary) var(--progress, 0%), rgba(255,255,255,0.08) 0%);
+  -webkit-mask: radial-gradient(closest-side, #0000 79%, #000 80%);
+          mask: radial-gradient(closest-side, #0000 79%, #000 80%);
+}
+
+/* Glassmorphism card utility */
+.glassmorphism-card {
+  background-color: rgba(14, 33, 40, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* New utilities for request */
+.glassmorphism {
+  background: rgba(23, 50, 54, 0.5);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 229, 255, 0.1);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
+}
+
+.soft-glass {
+  background: rgba(23, 50, 54, 0.3);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.text-primary { color: #00E5FF; }
+.bg-primary { background-color: #00E5FF; }
+
+/* Modal animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-slideUp {
+  animation: slideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Timer completion animations */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 255, 0, 0.8);
+    transform: scale(1.05);
+  }
+}
+
+.animate-blink {
+  animation: blink 1s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 1.5s ease-in-out infinite;
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
