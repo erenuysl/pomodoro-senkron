@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 // Lazy load components
 const GoogleLogin = lazy(() => import("./components/GoogleLogin"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
-const MobileNav = lazy(() => import("./components/MobileNav"));
 const InstallPrompt = lazy(() => import("./components/InstallPrompt"));
 
 // Loading component
@@ -72,7 +71,6 @@ export default function App() {
               </>
             )}
           </Routes>
-          {user && <MobileNav />}
           <InstallPrompt />
         </Suspense>
       </BrowserRouter>

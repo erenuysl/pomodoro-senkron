@@ -6,7 +6,6 @@ import Timer from "../components/Timer";
 import { usePresence } from "../hooks/usePresence";
 import GroupManager from "../components/GroupManager";
 import Toast from "../components/Toast";
-import MobileNav from "../components/MobileNav";
 import PageContainer from "../components/ui/PageContainer";
 import Card from "../components/ui/Card";
 import GroupActivity from "../components/GroupActivity";
@@ -48,7 +47,7 @@ export default function Dashboard() {
 
   return (
     <div className="font-sans antialiased bg-gradient-to-b from-[#101418] to-[#0b1115] text-white min-h-screen w-full">
-      <main className="flex-1 overflow-y-auto pb-24 w-full">
+      <main className="flex-1 overflow-y-auto w-full">
         {!groupId ? (
           <GroupManager />
         ) : (
@@ -93,7 +92,6 @@ export default function Dashboard() {
           </PageContainer>
         )}
       </main>
-      <MobileNav />
       <Toast message={toast} show={!!toast} onClose={() => setToast("")} />
     </div>
   );
