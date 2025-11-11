@@ -45,30 +45,37 @@ function GoogleLoginRoute() {
 export default function App() {
   const { user, loading } = useAuth();
 
-  if (loading) return <p style={{ color: "white" }}>Yükleniyor...</p>;
+  if (loading) return <LoadingSpinner />;
 
   return (
-    <BrowserRouter>
-      <Suspense fallback={<LoadingSpinner />}>
-        <Routes>
-          {!user && (
-            <>
-              <Route path="/" element={<GoogleLoginRoute />} />
-              {/* tüm diğer yönlendirmeler */}
-              <Route path="*" element={<Navigate to="/" />} />
-            </>
-          )}
+    <div style={{ 
+      minHeight: '100vh', 
+      backgroundColor: '#0A1A1F',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
+      <BrowserRouter>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            {!user && (
+              <>
+                <Route path="/" element={<GoogleLoginRoute />} />
+                {/* tüm diğer yönlendirmeler */}
+                <Route path="*" element={<Navigate to="/" />} />
+              </>
+            )}
 
-          {user && (
-            <>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="*" element={<Navigate to="/" />} />
-            </>
-          )}
-        </Routes>
-        {user && <MobileNav />}
-        <InstallPrompt />
-      </Suspense>
-    </BrowserRouter>
+            {user && (
+              <>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="*" element={<Navigate to="/" />} />
+              </>
+            )}
+          </Routes>
+          {user && <MobileNav />}
+          <InstallPrompt />
+        </Suspense>
+      </BrowserRouter>
+    </div>
   );
 }

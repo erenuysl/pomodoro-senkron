@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="tr">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -11,6 +11,7 @@
     
     <!-- Theme Colors -->
     <meta name="theme-color" content="#00E5FF" />
+    <meta name="color-scheme" content="dark" />
     <meta name="msapplication-TileColor" content="#0A1A1F" />
     
     <!-- iOS Meta Tags -->
@@ -26,9 +27,26 @@
     <meta name="description" content="AMTM-SENKRON: Sosyal, rekabetçi ve verimli bir Pomodoro çalışma arkadaşı." />
     
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;600&display=swap" rel="stylesheet" />
+    
+    <style>
+      /* Sayfa yüklenirken beyaz flash'ı önle */
+      html {
+        background-color: #0A1A1F;
+        color-scheme: dark;
+      }
+      body {
+        background-color: #0A1A1F;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+      }
+      #root {
+        min-height: 100vh;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
-</html>
+</html>""

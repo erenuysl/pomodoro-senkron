@@ -76,49 +76,35 @@ function Timer({ defaultDuration = 25, groupId = "demo", onComplete }) {
     } catch {}
   };
 
-  const getAngleFromEvent = (e) => {
-    if (!timerCircleRef.current) return 0;
-    
-    const rect = timerCircleRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    
-    const deltaX = clientX - centerX;
-    const deltaY = clientY - centerY;
-    
-    let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-    angle = (angle + 90 + 360) % 360;
-    
-    return angle;
-  };
+  const startYRef = useRef(0);
+  const accumulatedChangeRef = useRef(0);
 
   const handleTimerMouseDown = (e) => {
     if (running) return;
-    e.preventDefault(); // Scroll'u engelle
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    startYRef.current = clientY;
+    accumulatedChangeRef.current = 0;
     dragStartTimeRef.current = Date.now();
     setIsDragging(true);
-    lastAngleRef.current = getAngleFromEvent(e);
   };
 
   const handleTimerMove = (e) => {
     if (!isDragging || running) return;
-    e.preventDefault(); // Scroll'u engelle
+    e.preventDefault();
+    e.stopPropagation();
     
-    const currentAngle = getAngleFromEvent(e);
-    let angleDiff = currentAngle - lastAngleRef.current;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const deltaY = startYRef.current - clientY; // Yukarı kaydırma = pozitif
     
-    // 180 derece geçişini düzelt (360->0 veya 0->360)
-    if (angleDiff > 180) angleDiff -= 360;
-    if (angleDiff < -180) angleDiff += 360;
+    // Her 30 piksel = 1 dakika (daha kolay kontrol)
+    const totalMinuteChange = Math.floor(deltaY / 30);
+    const changeFromLast = totalMinuteChange - accumulatedChangeRef.current;
     
-    // Hassasiyeti azalttık: 15 derece = 1 dakika (daha stabil)
-    const minuteChange = Math.round(angleDiff / 15);
-    
-    if (minuteChange !== 0) {
-      let newMinutes = duration + minuteChange;
+    if (changeFromLast !== 0) {
+      let newMinutes = duration + changeFromLast;
       newMinutes = Math.max(5, Math.min(60, newMinutes));
       
       if (newMinutes !== duration) {
@@ -131,13 +117,14 @@ function Timer({ defaultDuration = 25, groupId = "demo", onComplete }) {
         }
       }
       
-      lastAngleRef.current = currentAngle;
+      accumulatedChangeRef.current = totalMinuteChange;
     }
   };
 
   const handleTimerMouseUp = () => {
-    const dragDuration = Date.now() - dragStartTimeRef.current;
     setIsDragging(false);
+    startYRef.current = 0;
+    accumulatedChangeRef.current = 0;
   };
 
   useEffect(() => {
@@ -149,12 +136,14 @@ function Timer({ defaultDuration = 25, groupId = "demo", onComplete }) {
       window.addEventListener('mouseup', upHandler);
       window.addEventListener('touchmove', moveHandler, { passive: false });
       window.addEventListener('touchend', upHandler);
+      window.addEventListener('touchcancel', upHandler);
       
       return () => {
         window.removeEventListener('mousemove', moveHandler);
         window.removeEventListener('mouseup', upHandler);
         window.removeEventListener('touchmove', moveHandler);
         window.removeEventListener('touchend', upHandler);
+        window.removeEventListener('touchcancel', upHandler);
       };
     }
   }, [isDragging, duration]);
@@ -354,10 +343,10 @@ function Timer({ defaultDuration = 25, groupId = "demo", onComplete }) {
         />
       </div>
 
-      {/* Timer Circle - Döndürülebilir */}
+      {/* Timer Circle - Kaydırılabilir */}
       <div className="text-center mb-2">
         <p className="text-[#00E5FF]/60 text-sm font-medium">
-          {!running ? '⟲ Döndürerek süreyi ayarla' : 'Timer çalışıyor...'}
+          {!running ? '↕️ Yukarı/aşağı kaydırarak süreyi ayarla' : 'Timer çalışıyor...'}
         </p>
       </div>
       

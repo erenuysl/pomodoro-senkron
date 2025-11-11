@@ -125,7 +125,7 @@ export default defineConfig({
             }
           }
         ],
-        navigateFallback: '/offline.html',
+        navigateFallback: null, // Offline sayfasını devre dışı bırak
         navigateFallbackDenylist: [/^\/api/]
       }
     }),

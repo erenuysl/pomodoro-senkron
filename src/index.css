@@ -27,6 +27,8 @@ html, body {
   overflow-x: hidden;
   /* Mobilde pull-to-refresh'i engelle */
   overscroll-behavior-y: contain;
+  /* Beyaz flash'ı önle */
+  background-color: #0A1A1F;
 }
 
 body {
@@ -36,12 +38,14 @@ body {
   font-family: 'Inter', sans-serif;
   display: block !important;
   justify-content: unset !important;
+  min-height: 100vh;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
   display: block;
+  background-color: #0A1A1F;
 }
 
 html { scroll-behavior: smooth; }
